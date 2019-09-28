@@ -2,6 +2,7 @@ import sbt._
 
 object Dependencies {
   lazy val common: Seq[ModuleID] = Seq(
+    "com.github.pureconfig" %% "pureconfig" % "0.12.0"
   )
 
   lazy val http: Seq[ModuleID] = Seq(
