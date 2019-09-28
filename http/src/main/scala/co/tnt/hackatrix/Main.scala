@@ -1,12 +1,8 @@
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.stream.ActorMaterializer
-import co.tnt.hackatrix.infrastructure.dto.{ProblemDTO, ReasonDTO}
 import co.tnt.hackatrix.infrastructure.routes.Routes
 import scala.concurrent.ExecutionContextExecutor
-// for JSON serialization/deserialization following dependency is required:
-// "com.typesafe.akka" %% "akka-http-spray-json" % "10.1.7"
-import spray.json.DefaultJsonProtocol._
 
 import scala.io.StdIn
 
