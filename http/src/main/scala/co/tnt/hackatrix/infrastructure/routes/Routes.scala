@@ -7,33 +7,33 @@ import akka.http.scaladsl.server.Directives.{as, complete, concat, entity, get, 
 import akka.http.scaladsl.server.Route
 import co.tnt.hackatrix.infrastructure.dto.{ProblemDTO, ReasonDTO}
 import spray.json.DefaultJsonProtocol.{jsonFormat1, jsonFormat2}
-
 import scala.concurrent.{ExecutionContextExecutor, Future}
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
+import co.tnt.hackatrix.domain.problem.algebra.InMemoryRepository
 import spray.json.DefaultJsonProtocol._
+import  co.tnt.hackatrix.domain.problem.Reason
 
 
-
-class Routes(exc: ExecutionContextExecutor) {
-  implicit val reason = jsonFormat2(ReasonDTO)
+class Routes(implicit exc: ExecutionContextExecutor) {
+  implicit val reasonDTO = jsonFormat1(ReasonDTO)
   implicit val problem = jsonFormat1(ProblemDTO)
   implicit val advice = jsonFormat1(Advice)
 
   case class Advice(description: String)
 
+  val inmemory= new InMemoryRepository().findReasons
   val routes: Route =
     concat(
       get {
-        pathPrefix("g" / IntNumber) { id =>
-          val maybeItem: Future[Option[ReasonDTO]] = fetchItem(true, id)
-          onSuccess(maybeItem) {
-            case Some(item) => complete(item)
-            case None       => complete(StatusCodes.NotFound)
+        pathPrefix("getProblems" ) {
+          onSuccess(inmemory) {
+            case  e: List[Reason] => complete(reasonToReasonDTO(e))
+            case _       => complete(StatusCodes.NotFound)
           }
         }
       },
       post {
-        path("find_result") {
+        path("problem") {
           entity(as[ProblemDTO]) { problem =>
             val saved: Future[Done] = saveOrder(problem)
             onComplete(saved) { done =>
@@ -44,8 +44,12 @@ class Routes(exc: ExecutionContextExecutor) {
       }
     )
 
-  def fetchItem(value: Boolean, id: Int): Future[Option[ReasonDTO]] = Future {
-    Option(ReasonDTO(id, value))
+  def reasonToReasonDTO(list: List[Reason]): List[ReasonDTO] =  list.map(id=> ReasonDTO(id.id))
+
+
+
+  def fetchItem(id: Int): Future[Option[ReasonDTO]] = Future {
+    Option(ReasonDTO(id))
   }(exc)
 
   def saveOrder(order: ProblemDTO): Future[Done] = {

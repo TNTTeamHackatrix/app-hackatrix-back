@@ -1,8 +1,14 @@
 package co.tnt.hackatrix.infrastructure.dto
 
-final case class ReasonDTO(id: Int, value: Boolean)
+import java.util.UUID
+
+final case class ReasonDTO(id:Int)
+
 
 final case class ProblemDTO(reasons: List[ReasonDTO])
+
+
+
 
 
 
