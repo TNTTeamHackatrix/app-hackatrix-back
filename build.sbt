@@ -4,7 +4,7 @@ version := "0.1"
 
 scalaVersion := "2.12.10"
 
-
+scalacOptions += "-Ypartial-unification"
 lazy val commonSettings = Seq(
   scalaVersion := "2.12.10",
   fork in Test := true,
@@ -21,6 +21,7 @@ lazy val core = project
   .configs()
   .settings(
     commonSettings,
+    libraryDependencies ++= Dependencies.common,
     name += "-core",
   )
 

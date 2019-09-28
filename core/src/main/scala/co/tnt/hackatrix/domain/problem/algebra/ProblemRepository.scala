@@ -1,4 +1,5 @@
 package co.tnt.hackatrix.domain.problem.algebra
+import java.util.UUID
 
 import co.tnt.hackatrix.domain.problem.Reason
 
@@ -9,6 +10,13 @@ trait ProblemRepository {
   def findReasons: Future[List[Reason]]
 }
 
-final class ProblemRepositoryImpl extends ProblemRepository {
-  override def findReasons: Future[List[Reason]] = ???
+final class InMemoryRepository() extends ProblemRepository {
+
+  private val  reasons = List(Reason(id = UUID.randomUUID()),
+                              Reason(id = UUID.randomUUID()),
+                              Reason(id = UUID.randomUUID()),
+                              )
+  override def findReasons: Future[List[Reason]] = {
+    Future.successful(reasons)
+  }
 }
