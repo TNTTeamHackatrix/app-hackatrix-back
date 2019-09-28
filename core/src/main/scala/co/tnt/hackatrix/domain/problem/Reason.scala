@@ -1,9 +1,13 @@
 package co.tnt.hackatrix.domain.problem
 
-final case class Reason private(){
+import java.util.UUID
+
+final case class Reason private(id:UUID){
+
+
 
 }
 
 object Reason {
-  def apply: Reason = new Reason()
+  def apply(id: UUID): Reason = new Reason(id)
 }
