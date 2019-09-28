@@ -31,5 +31,6 @@ lazy val http = project
       commonSettings,
       libraryDependencies ++=  Dependencies.http,
       name += "-http",
-      mainClass in Compile := Some("co.tnt.hackatrix")
-  )
+      mainClass in Compile := Some("co.tnt.hackatrix"),
+  ).dependsOn(core)
+  .enablePlugins(JavaAppPackaging)
