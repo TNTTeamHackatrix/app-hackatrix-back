@@ -16,12 +16,10 @@ object Main {
   implicit val system = ActorSystem("hackatrix")
   implicit val materializer = ActorMaterializer()
   implicit val executionContext: ExecutionContextExecutor = system.dispatcher
-  implicit val reason = jsonFormat2(ReasonDTO)
-  implicit val problem = jsonFormat1(ProblemDTO)
   val config: AppConfReader =  AppConfReader.apply
 
   def main(args: Array[String]) {
-    val bindingFuture = Http().bindAndHandle(new Routes(executionContext).routes, config.readConf.http.host, 8080)
+    val bindingFuture = Http().bindAndHandle(new Routes().routes, config.readConf.http.host, 8080)
     StdIn.readLine()
     bindingFuture
       .flatMap(_.unbind())

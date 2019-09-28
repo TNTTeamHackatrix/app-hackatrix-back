@@ -14,9 +14,9 @@ trait ProblemServices {
 }
 
 final class ProblemServicesImpl private()(implicit repo: ProblemRepository) extends ProblemServices {
-  override def evaluateProblem(problem: Problem): Future[Diagnostic] = ???
+  override def evaluateProblem(problem: Problem): Future[Diagnostic] = repo.evaluateProblem(problem)
 
-  override def getProblemsId(): Future[List[Reason]] = ???
+  override def getProblemsId(): Future[List[Reason]] = repo.findReasons
 }
 
 object ProblemServicesImpl {
