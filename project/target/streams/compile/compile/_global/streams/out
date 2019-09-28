@@ -1,0 +1,4 @@
+[error] /home/christian/Downloads/app-hackatrix-back/project/Dependencies.scala:12:5: ')' expected but string literal found.
+[error]     "com.typesafe.akka" %% "akka-stream" % "2.5.23"
+[error]     ^
+[error] one error found

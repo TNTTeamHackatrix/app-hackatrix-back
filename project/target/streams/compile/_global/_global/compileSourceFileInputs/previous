@@ -1,1 +1,1 @@
-["sbt.Task[scala.collection.immutable.Map[java.lang.String, scala.collection.Seq[scala.Tuple2[java.nio.file.Path, sbt.nio.FileStamp]]]]",{"2.12.10":{"hashes":[],"lastModifiedTimes":[]}}]
+["sbt.Task[scala.collection.immutable.Map[java.lang.String, scala.collection.Seq[scala.Tuple2[java.nio.file.Path, sbt.nio.FileStamp]]]]",{"2.12.10":{"hashes":[["/home/christian/Downloads/app-hackatrix-back/project/Dependencies.scala","88adb975c9cb2b482db57e0eb1e08b913ef45cc3"]],"lastModifiedTimes":[]}}]
