@@ -4,7 +4,7 @@ version := "0.1"
 
 scalaVersion := "2.12.10"
 
-
+scalacOptions += "-Ypartial-unification"
 lazy val commonSettings = Seq(
   scalaVersion := "2.12.10",
   fork in Test := true,
@@ -21,6 +21,7 @@ lazy val core = project
   .configs()
   .settings(
     commonSettings,
+    libraryDependencies ++= Dependencies.common,
     name += "-core",
   )
 
@@ -31,6 +32,6 @@ lazy val http = project
       commonSettings,
       libraryDependencies ++=  Dependencies.http,
       name += "-http",
-      mainClass in Compile := Some("co.tnt.hackatrix.Main"),
+     mainClass in Compile := Some("co.tnt.hackatrix.Main"),
   ).dependsOn(core)
-  .enablePlugins(JavaAppPackaging)
+  .enablePlugins(JavaAppPackaging).dependsOn(core)

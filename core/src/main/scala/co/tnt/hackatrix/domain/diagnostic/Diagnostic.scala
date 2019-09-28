@@ -1,7 +1,7 @@
 package co.tnt.hackatrix.domain.diagnostic
 
-final case class Diagnostic private()
+import co.tnt.hackatrix.domain.task.Task
 
-object Diagnostic {
-  def apply: Diagnostic = new Diagnostic()
-}
+ case class Diagnostic (tasks: List[Task], profile: String)
+
+
