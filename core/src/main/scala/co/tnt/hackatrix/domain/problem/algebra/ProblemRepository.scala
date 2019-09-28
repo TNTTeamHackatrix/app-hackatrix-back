@@ -15,9 +15,9 @@ trait ProblemRepository {
 
 final class InMemoryRepository() extends ProblemRepository {
 
-  private val  reasons = List(Reason(id = UUID.randomUUID()),
-                              Reason(id = UUID.randomUUID()),
-                              Reason(id = UUID.randomUUID()),
+  private val  reasons = List(Reason(id = 1),
+                              Reason(id = 2),
+                              Reason(id = 3),
                               )
 
   private val fixedDiagnostic = Diagnostic( List(Task(name = "task1", isChecked = false, feedback = "")), "Some profile")
